@@ -1,8 +1,8 @@
 "use client"
-import React, { use, useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { isValidEmail, isValidPassword, isValiedUsername } from '@/validations/inputValidation';
 
-function page() {
+function Signup() {
     const [user, setUser] = useState<WithEmail<User>>({email: '', username: '', password: ''});
 
     const [isInvalid, setIsInvalid] = useState({
@@ -18,7 +18,7 @@ function page() {
         const validPassword = isValidPassword(user.password);
 
         if(!validEmail || !validUsername || !validPassword) {
-            setIsInvalid(prev => ({email: !validEmail, username: !validUsername, password: !validPassword}));
+            setIsInvalid(({email: !validEmail, username: !validUsername, password: !validPassword}));
             return;
         }
         const res = await fetch(`/api/auth/signup`, {
@@ -36,7 +36,7 @@ function page() {
     useEffect(() => {
         if(isInvalid.email || isInvalid.username || isInvalid.password) {
             setTimeout(() => {
-                setIsInvalid(prev => ({email: false, username: false, password: false}));
+                setIsInvalid(({email: false, username: false, password: false}));
             }, 2000)
         }
     }, [isInvalid])
@@ -67,4 +67,4 @@ function page() {
     )
 }
 
-export default page
+export default Signup

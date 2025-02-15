@@ -1,4 +1,4 @@
-import { Delete, Pencil, Trash2 } from 'lucide-react'
+import {  Pencil, Trash2 } from 'lucide-react'
 import React,{useState} from 'react'
 import CreateModal from './Modals/CreateModal'
 

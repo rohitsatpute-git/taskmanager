@@ -28,6 +28,7 @@ export default function Home() {
             },
             body: JSON.stringify({ title: 'New Note', content: 'This is the content of the new note.' }),
         });
+        console.log("response", response);
     }
 
     const logout = async() => {
@@ -35,6 +36,7 @@ export default function Home() {
             method: 'POST',
             credentials: "include",
         });
+        console.log("response", response);
         window.location.href = '/login';
     }
 

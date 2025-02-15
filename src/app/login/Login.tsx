@@ -1,7 +1,7 @@
 "use client"
-import React, { use, useCallback, useEffect, useState } from 'react'
+import React, {  useCallback, useEffect, useState } from 'react'
 
-function page() {
+function Login() {
     const [user, setUser] = useState<User>({ username: '', password: ''});
     const [invalidInput, setInvalidInput] = useState(false);
 
@@ -52,4 +52,4 @@ function page() {
     )
 }
 
-export default page
+export default Login
