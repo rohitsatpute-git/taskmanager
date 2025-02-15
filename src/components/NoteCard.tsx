@@ -10,7 +10,7 @@ function NoteCard({note} : NoteCardProp) {
     const [showEditModal, setShowEditModal] = useState(false);
 
     const onDelete = async() => {
-        const response = await fetch(`http://localhost:3000/api/notes`, {
+        const response = await fetch(`/api/notes`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

@@ -22,8 +22,6 @@ export async function middleware(req: NextRequest) {
             request: { headers: requestHeaders },
         });
 
-        res.headers.append("Access-Control-Allow-Origin", "https://taskmanager-sigma-six.vercel.app/");
-
         return res;
     } catch (error) {
         console.log("error", error);

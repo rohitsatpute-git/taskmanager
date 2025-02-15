@@ -11,7 +11,7 @@ function CreateModal({onClose, existingNote}: CreateModalProp) {
 
     const submit =  async() => {
         console.log("note", existingNote)
-        const response = await fetch('http://localhost:3000/api/notes', {
+        const response = await fetch('/api/notes', {
             method: existingNote ? 'PUT' : 'POST',
             headers: {
                 'Content-Type': 'application/json',

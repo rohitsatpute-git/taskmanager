@@ -9,7 +9,7 @@ export default function Home() {
     const [showModal, setShowModal] = useState(false);
 
     const fetchNotes = async () => {
-      const res = await fetch("http://localhost:3000/api/notes");
+      const res = await fetch("/api/notes");
       const notes = await res.json();
       setNotes(notes);
       console.log("notes", notes)
@@ -21,7 +21,7 @@ export default function Home() {
 
 
     const saveNote = async() => {
-        const response = await fetch('http://localhost:3000/api/notes', {
+        const response = await fetch('/api/notes', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
