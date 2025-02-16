@@ -44,17 +44,17 @@ function Signup() {
         <div className='w-screen h-screen fixed inset-0 flex flex-col justify-center items-center z-[1] bg-[#000]/90 select-none'>
             <div className='bg-white flex flex-col gap-y-4 rounded-md p-10 text-[#161616]'>
                 <h1 className='w-full mx-auto text-xl text-center '>Signup</h1>
-                <div className='flex gap-x-2'>
+                <div className='flex gap-x-2 justify-between'>
                     <span>Username</span>
                     <input className={`border ${isInvalid.username ? 'border-red-500' : ''}`} type='text' value={user.username} onChange={(e) => setUser(prev => ({...prev, username: e.target.value}))}/>
                 </div>
 
-                <div className='flex gqp-x-2'>
+                <div className='flex gqp-x-2 justify-between'>
                     <span>Email</span>
                     <input className={`border ${isInvalid.email ? 'border-red-500' : ''}`}  type='email' value={user.email} onChange={(e) => setUser(prev => ({...prev, email: e.target.value}))}/>
                 </div>
 
-                <div className='flex gqp-x-2'>
+                <div className='flex gqp-x-2 justify-between'>
                     <span>Password</span>
                     <input  className={`border ${isInvalid.password ? 'border-red-500' : ''}`} type='password' value={user.password} onChange={(e) => setUser(prev => ({...prev, password: e.target.value}))}/>
                 </div>

@@ -10,13 +10,16 @@ function Login() {
         const res = await fetch(`/api/auth/login`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'applicaiton/json'
+                'Content-Type': 'applicaiton/json',
+                'Authorization': localStorage.getItem("username") || "" ,
             },
             body: JSON.stringify(user),
-            credentials: "include", // 👈 Required to send & receive cookies
+            credentials: "include", 
+
         })
         console.log("response", res)
         if(res.status === 200) {
+            localStorage.setItem("username", user.username);
             window.location.href = '/';
         }else{
             setInvalidInput(true);
@@ -34,12 +37,12 @@ function Login() {
         <div className='w-screen h-screen fixed inset-0 flex flex-col justify-center items-center z-[1] bg-[#000]/90 select-none'>
             <div className='bg-white flex flex-col gap-y-4 rounded-md p-10 text-[#161616]'>
                 <h1 className='w-full mx-auto text-xl text-center '>Login</h1>
-                <div className='flex gap-x-2'>
+                <div className='flex gap-x-2 justify-between'>
                     <span>Username</span>
                     <input className={`border ${invalidInput && 'border-red-500'} transition-all ease-in`} type='text' value={user.username} onChange={(e) => setUser(prev => ({...prev, username: e.target.value}))}/>
                 </div>
 
-                <div className='flex gqp-x-2'>
+                <div className='flex gqp-x-2 justify-between'>
                     <span>Password</span>
                     <input  className={`border ${invalidInput && 'border-red-500'} transition-all ease-in`} type='password' value={user.password} onChange={(e) => setUser(prev => ({...prev, password: e.target.value}))}/>
                 </div>

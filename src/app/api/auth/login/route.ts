@@ -32,11 +32,11 @@ export async function POST(req: Request) {
     });
 
     const cookie = serialize("token", token, {
-        httpOnly: true, // ❌ JavaScript cannot access it
-        secure: process.env.NODE_ENV === "production", // ✅ HTTPS in production
-        sameSite: "strict", // ✅ CSRF protection
-        path: "/", // ✅ Available across the whole site
-        maxAge: 60, // 7 Days expiry
+        httpOnly: true, 
+        secure: process.env.NODE_ENV === "production", 
+        sameSite: "strict", 
+        path: "/", 
+        maxAge: 60 * 60, 
     });
 
     
