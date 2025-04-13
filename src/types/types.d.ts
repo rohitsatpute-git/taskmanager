@@ -1,6 +1,7 @@
 interface Note {
     title: string;
     content: string;
+    status: string
 }
 
 type WithId<T> = T & { _id: string };

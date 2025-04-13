@@ -33,7 +33,7 @@ export default function Home() {
       <div className="p-10 h-screen w-screen fixed flex flex-col justify-center items-center z-[1] gap-y-2">
           <div className="flex flex-wrap  gap-4 w-full h-full p-10 rounded-md border boder-[#fff] relative overflow-scroll">
               <div className="fixed top-12 right-12 bg-white px-4 py-2 rounded-md text-[#161616] cursor-pointer z-[2]" onClick={() => logout()}>Logout</div>
-              <div className="fixed top-24 right-12 bg-white px-4 py-2 rounded-md text-[#161616] cursor-pointer z-[2]" onClick={() => setShowModal(true)}>Add Note</div>
+              <div className="fixed top-24 right-12 bg-white px-4 py-2 rounded-md text-[#161616] cursor-pointer z-[2]" onClick={() => setShowModal(true)}>Add Task</div>
 
               {
                 notes.map((note, index) => (

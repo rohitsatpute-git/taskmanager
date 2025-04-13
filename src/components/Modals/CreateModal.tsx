@@ -7,7 +7,7 @@ interface CreateModalProp {
 }
 
 function CreateModal({onClose, existingNote, fetchNotes}: CreateModalProp) {
-    const [note , setNote] = useState<Note>({title: existingNote?.title || '', content: existingNote?.content || ''});
+    const [note , setNote] = useState<Note>({title: existingNote?.title || '', content: existingNote?.content || '', status: existingNote?.status || 'pending'});
     const [initialMount, setInitialMount] = useState(true);
 
     const onSubmit =  async()=> {
@@ -23,7 +23,7 @@ function CreateModal({onClose, existingNote, fetchNotes}: CreateModalProp) {
         })
         console.log("response", response);
         if(response.status === 201 || response.status === 200) {
-            setNote({title: '', content: ''});
+            setNote({title: '', content: '', status: 'pending'});
             await fetchNotes();
         }
     }
@@ -78,14 +78,26 @@ function CreateModal({onClose, existingNote, fetchNotes}: CreateModalProp) {
         window.removeEventListener("keydown", handleEnter);
       };
     }, [note, onSubmit]);
+
+    const markAsDone = useCallback(async() => {
+       const res = await fetch(`/api/notes`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({...note,_id: existingNote?._id , status: 'completed'})
+       })
+       if(res.status == 200) onClose();
+    }, [])
     
 
     return (
-        <div className='w-screen h-screen fixed inset-0 z-[2] text-[#161616] flex flex-col justify-center items-center bg-[#000]/90' onClick={e => saveAndClose(e)}>
+        <div className='w-screen h-screen fixed inset-0 z-[2] text-[#161616] flex flex-col justify-center items-center bg-[#000]/60' onClick={e => saveAndClose(e)}>
           <div
             className="w-[50%] h-[80%] rounded-3xl p-10 bg-white flex flex-col gap-y-4 items-center relative"
             onClick={(e) => e.stopPropagation()}
             >
+            <div className='top-2 right-2 rounded-md px-4 py-2 border self-end hover:scale-110 cursor-pointer' onClick={markAsDone}>Mark as done</div>
             {/* Title Input */}
             <input
                 type="text"
@@ -93,17 +105,17 @@ function CreateModal({onClose, existingNote, fetchNotes}: CreateModalProp) {
                 placeholder="Enter title here..."
                 value={note.title}
                 onChange={(e) =>
-                setNote((prev) => ({ title: e.target.value, content: prev.content }))
+                setNote((prev) => ({ title: e.target.value, content: prev.content, status: prev.status }))
                 }
             />
 
             {/* Content Textarea */}
             <textarea
                 className="input-field h-full w-full resize-none text-lg"
-                placeholder="Write your note..."
+                placeholder="Write your task..."
                 value={note.content}
                 onChange={(e) =>
-                setNote((prev) => ({ title: prev.title, content: e.target.value }))
+                setNote((prev) => ({ title: prev.title, content: e.target.value, status: prev.status }))
                 }
             />
 

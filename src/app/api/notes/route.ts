@@ -22,17 +22,19 @@ export async function POST(req: Request) {
 
   if(!username) return NextResponse.json({message: "username not found"}, {status: 400})
 
-  const newNote = new Note({ title, content, username });
+  const newNote = new Note({ title, content, username, status: 'pending' });
   await newNote.save();
-  console.log("note saved successfully")
+  console.log("note saved successfully",newNote)
   return NextResponse.json(newNote, { status: 201 });
 
 }
 
 
 export async function PUT(req: Request) {
-  const { _id, title, content } = await req.json();
-  await Note.findByIdAndUpdate(_id, { title, content });
+  const { _id, title, content, status } = await req.json();
+  console.log("status", status, _id, title,content)
+  const res = await Note.findByIdAndUpdate(_id, { title, content, status }, { new: true });
+  console.log("res", res)
   return NextResponse.json({ message: "Note updated successfully" }, { status: 200 });
 }
 

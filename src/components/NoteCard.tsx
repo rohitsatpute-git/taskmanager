@@ -34,7 +34,7 @@ function NoteCard({note, fetchNotes} : NoteCardProp) {
     }
     
     return (
-        <div className={`border p-2 rounded-md flex flex-col gap-y-4 relative h-[200px] w-[200px] ${hovered === note._id && 'border-[#b9b13d] border-4'} transition ease-in `} onMouseEnter={() => setHovered(note._id)} onMouseLeave={() => setHovered('')} onClick={() => onNoteCardClick()}>
+        <div className={`border p-2 rounded-md flex flex-col gap-y-4 relative h-[200px] w-[200px] ${hovered === note._id && 'border-[#b9b13d] border-4'} ${note.status === 'completed' && 'border-teal-600'} transition ease-in `} onMouseEnter={() => setHovered(note._id)} onMouseLeave={() => setHovered('')} onClick={() => onNoteCardClick()}>
             <div className='flex gap-x-4 self-end'>
                 <Pencil className='top-2 right-12 cursor-pointer w-5 h-5' onClick={() => setShowEditModal(true)}/>
                 <Trash2 className=' top-2 right-2 cursor-pointer w-5 h-5' onClick={(e) => onDelete(e)}/>
