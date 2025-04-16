@@ -9,6 +9,7 @@ interface CreateModalProp {
 function CreateModal({onClose, existingNote, fetchNotes}: CreateModalProp) {
     const [note , setNote] = useState<Note>({title: existingNote?.title || '', content: existingNote?.content || '', status: existingNote?.status || 'pending'});
     const [initialMount, setInitialMount] = useState(true);
+    const [uploading, setUploading] = useState(false);
 
     const onSubmit =  async()=> {
         console.log("note", existingNote)
@@ -30,15 +31,17 @@ function CreateModal({onClose, existingNote, fetchNotes}: CreateModalProp) {
 
     const saveAndClose = useCallback(async(e: React.MouseEvent) => {
         e.stopPropagation();
+        if(uploading) return;
         console.log("note", note)
         if(!note || (note.content === ''  && note.title === '')) {
             onClose();
             return;
         }
+        setUploading(true);
         await onSubmit();
         // setNotes(notes => [...notes, {title: note.title, content: note.content}]);
         onClose(); 
-    }, [note])
+    }, [note, uploading])
 
     useEffect(() => {
         if(initialMount) {
